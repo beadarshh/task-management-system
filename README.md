@@ -1,90 +1,118 @@
-# Task-Management-System
-It is a full-stack task management application designed to streamline your productivity. Built with a robust tech stack, it offers a seamless user experience for managing tasks efficiently.
+# Taskfyer - Task Management System
 
-Note: Email verification is optional in this implementation.
+Welcome to **Taskfyer**, your personal Task Management System designed to simplify task tracking and boost productivity. Built using modern web technologies with clean architecture and modular design.
 
-🚀 Tech Stack
-Frontend:
-Next.js 13+ (App Router)
-TypeScript
-Tailwind CSS
-ShadCN UI
-React Hook Form
-Zod
-Axios
+---
 
-Backend:
-Node.js
-Express.js
-MongoDB with Mongoose
-JWT for Authentication
+## 🚀 Features
 
-Deployment:
-Frontend: Vercel
-Backend: Render
+* 🧑‍💼 User Authentication (with optional Email Verification)
+* 🗂️ Create, Update, Delete Tasks
+* ✅ Mark Tasks as Completed
+* 📁 Organized UI with Sidebar Navigation
+* 🔐 Protected Routes (for authenticated users)
+* 🎨 Responsive and Glassmorphism UI
 
-GitHub
-📸 Screenshots
-Login Page
+---
 
+## 🛠 Tech Stack
 
-Dashboard
-🧰 Features
-User Authentication (Login/Signup)
-Create, Read, Update, and Delete (CRUD) Tasks
-Responsive Design for All Devices
-Real-time Notifications
-Optional Email Verification
-Secure JWT-based Authentication
-Intuitive UI with ShadCN Components
-🛠️ Installation
-Prerequisites
-Node.js (v14 or higher)
-MongoDB Database
-Clone the Repository
-bash
-Copy
-Edit
-git clone https://github.com/Maclinz/taskfyer.git
-cd taskfyer
-Setup Environment Variables
-Create a .env file in the root directory and add the following:
+**Frontend:**
 
-env
-Copy
-Edit
-MONGO_URI=your_mongo_uri
-JWT_SECRET=your_jwt_secret
-CLIENT_URL=http://localhost:3000
-PORT=8000
-Install Dependencies
-Backend:
+* Next.js 14 (App Router)
+* React 18+
+* Tailwind CSS
+* TypeScript
 
-bash
-Copy
-Edit
-cd backend
+**Backend:**
+
+* Node.js
+* MongoDB (via Mongoose)
+* NextAuth.js (Authentication)
+
+**Deployment:**
+
+* Vercel (Frontend)
+* MongoDB Atlas (Database)
+
+---
+
+## 🧩 Project Structure
+
+```
+├── app
+│   ├── Components     # Reusable UI components
+│   ├── api            # API routes
+│   ├── dashboard      # Authenticated dashboard
+│   └── login / signup # Auth pages
+├── context            # React Context API (e.g. User, Task)
+├── providers          # Context Providers
+├── utils              # Utility functions
+├── public             # Static assets (images, icons)
+├── styles             # Global CSS (Tailwind)
+└── .env               # Environment variables
+```
+
+---
+
+## 🧪 Getting Started Locally
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/beadarshh/task-management-system.git
+cd task-management-system
+```
+
+### 2. Install Dependencies
+
+```bash
 npm install
-Frontend:
+# or
+yarn install
+```
 
-bash
-Copy
-Edit
-cd ../client
-npm install
-Run the Application
-Backend:
+### 3. Set Up Environment Variables
 
-bash
-Copy
-Edit
-cd backend
+Create a `.env.local` file:
+
+```env
+MONGODB_URI=<your-mongodb-uri>
+NEXTAUTH_SECRET=<your-nextauth-secret>
+NEXTAUTH_URL=http://localhost:3000
+```
+
+### 4. Run the App
+
+```bash
 npm run dev
-Frontend:
+# or
+yarn dev
+```
 
-bash
-Copy
-Edit
-cd ../client
-npm run dev
-The frontend will be available at http://localhost:3000 and the backend at http://localhost:8000.
+Visit `http://localhost:3000`
+
+---
+
+## 🔒 Optional Features
+
+* **Email Verification** is **optional** and can be enabled with a mail provider like Resend, SendGrid, etc.
+* You can customize your own themes and task categories.
+
+---
+
+## 🧑‍💻 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+## 📃 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 🌐 Live Demo
+
+**[Check out the live app](https://taskfyer.vercel.app)**
