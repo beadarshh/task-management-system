@@ -1,11 +1,18 @@
 "use client";
-import { useUserContext } from ".././context/userContext";
-import useRedirect from ".././hooks/useUserRedirect";
-import { useState } from "react";
-import ChangePasswordForm from "./Components/auth/ChangePasswordForm/ChangePasswordForm";
+
+import { useTasks } from "@/context/taskContext";
+import { useUserContext } from "@/context/userContext";
+import useRedirect from "@/hooks/useUserRedirect";
+import { useEffect, useState } from "react";
+import TaskItem from "./Components/TaskItem/TaskItem";
+import Filters from "./Components/Filters/Filters";
+import { motion } from "framer-motion";
+import { container, item } from "@/utils/animations";
+import { filteredTasks } from "@/utils/utilities";
 
 export default function Home() {
   useRedirect("/login");
+
   const {
     logoutUser,
     user,
@@ -15,15 +22,27 @@ export default function Home() {
     allUsers,
     deleteUser,
   } = useUserContext();
-  const { name, photo, isVerified, bio } = user;
 
-  // state
+  const {
+    tasks,
+    openModalForAdd,
+    priority,
+    setPriority,
+  } = useTasks();
+
+  const { name, bio } = user;
+
   const [isOpen, setIsOpen] = useState(false);
 
-  // function
   const myToggle = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    setPriority("all");
+  }, []);
+
+  const allFilteredTasks = filteredTasks(tasks, priority);
 
   return (
     <main className="py-[2rem] mx-[10rem]">
@@ -32,15 +51,6 @@ export default function Home() {
           Welcome <span className="text-red-600">{name}</span>
         </h1>
         <div className="flex items-center gap-4">
-          {/* {!isVerified && (
-            // <button
-            //   className="px-4 py-2 bg-blue-500 text-white rounded-md"
-            //   onClick={emailVerification}
-            // >
-            //   Verify Account
-            // </button>
-          )} */}
-
           <button
             onClick={logoutUser}
             className="px-4 py-2 bg-red-600 text-white rounded-md"
@@ -49,17 +59,16 @@ export default function Home() {
           </button>
         </div>
       </header>
+
       <section>
         <p className="text-[#999] text-[2rem]">{bio}</p>
 
-        <h1>
-          <button
-            onClick={myToggle}
-            className="px-4 py-2 bg-[#2ECC71] text-white rounded-md"
-          >
-            Update Bio
-          </button>
-        </h1>
+        <button
+          onClick={myToggle}
+          className="px-4 py-2 bg-[#2ECC71] text-white rounded-md"
+        >
+          Update Bio
+        </button>
 
         {isOpen && (
           <form className="mt-4 px-8 py-4 max-w-[520px] w-full rounded-md">
@@ -84,42 +93,33 @@ export default function Home() {
           </form>
         )}
       </section>
-      <div className="mt-4 flex gap-8">
-        <div className="flex-1">
-          <ChangePasswordForm />
+
+      {/* All tasks */}
+      <section className="mt-12">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold">All Tasks</h2>
+          <Filters />
         </div>
-        <div className="flex-1">
-          {user.role === "admin" && (
-            <ul>
-              {allUsers.map(
-                (user: any, i: number) =>
-                  user.role !== "admin" && (
-                    <li
-                      key={i}
-                      className="mb-2 px-2 py-3 border grid grid-cols-4 items-center gap-8 rounded-md"
-                    >
-                      <img
-                        src={user.photo}
-                        alt={user.name}
-                        className="w-[40px]  h-[40px] rounded-full"
-                      />
-                      <p>{user.name}</p>
-                      <p>{user.bio}</p>
-                      <button
-                        className="bg-red-500 text-white p-2 rounded-md"
-                        onClick={() => {
-                          deleteUser(user._id);
-                        }}
-                      >
-                        Delete User
-                      </button>
-                    </li>
-                  )
-              )}
-            </ul>
-          )}
-        </div>
-      </div>
+
+        <motion.div
+          className="pb-[2rem] mt-6 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-[1.5rem]"
+          variants={container}
+          initial="hidden"
+          animate="visible"
+        >
+          {allFilteredTasks.map((task, i) => (
+            <TaskItem key={i} task={task} />
+          ))}
+          <motion.button
+            className="h-[16rem] w-full py-2 rounded-md text-lg font-medium text-gray-500 border-dashed border-2 border-gray-400
+            hover:bg-gray-300 hover:border-none transition duration-200 ease-in-out"
+            onClick={openModalForAdd}
+            variants={item}
+          >
+            Add New Task
+          </motion.button>
+        </motion.div>
+      </section>
     </main>
   );
 }

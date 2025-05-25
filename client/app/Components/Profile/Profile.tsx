@@ -2,6 +2,7 @@
 import { useTasks } from "@/context/taskContext";
 import { useUserContext } from "@/context/userContext";
 import React from "react";
+import Image from "next/image";
 
 function Profile() {
   const { user } = useUserContext();
@@ -14,6 +15,13 @@ function Profile() {
         onClick={openProfileModal}
       >
         <div>
+        <Image
+            src="/profilelogo.png" 
+            alt="profile"
+            width={80}
+            height={80}
+            className="rounded-full"
+          />
         </div>
         <div>
           <h1 className="flex flex-col text-xl">
