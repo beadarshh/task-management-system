@@ -121,15 +121,15 @@ npm run dev
    * `JWT_SECRET`
    * `CLIENT_URL=https://task-management-system-phi-eight.vercel.app`
 6. Use Node version `>=22.15.0` or downgrade `express-handlebars` to `7.0.7` if Render only supports `22.14.0`.
+7. Use the deployed link in the frontend where API calls are done.
 
 ### 🌐 Deploy Frontend to Vercel
 
 1. Go to [https://vercel.com](https://vercel.com) and log in.
 2. Import the frontend project (`/client` folder).
-3. Set environment variable:
-
-   * `VITE_SERVER_URL=https://task-management-system-backend-u01i.onrender.com`
-4. Deploy and enjoy!
+3. Set environment variable (if any)
+4. Use the deployed link in the backend as Client URL in the environment variables.
+5. Now enjoy your project is running successfully on the deployed link!
 
 ---
 
